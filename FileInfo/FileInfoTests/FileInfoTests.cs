@@ -9,13 +9,20 @@ namespace FileInfoTests
     [TestFixture]
     public class FileInfoTests
     {
+        private FileInfoFinder service;
+        private Mock<FileInfoRepository> repository;
+
+        [SetUp]
+        public void SetUp()
+        {
+            service = new FileInfoFinder();
+            repository = new Mock<FileInfoRepository>();
+            service.Repository = repository.Object;
+        }
+
         [Test]
         public void RetrieveEmptyContent()
         {
-            var service = new FileInfoFinder();
-            var repository = new Mock<FileInfoRepository>();
-            service.Repository = repository.Object;
-
             repository.Setup(x => x.GetContent(It.IsAny<string>()))
                 .Returns(string.Empty);
 
@@ -27,10 +34,6 @@ namespace FileInfoTests
         [Test]
         public void RetrieveOneKey()
         {
-            var service = new FileInfoFinder();
-            var repository = new Mock<FileInfoRepository>();
-            service.Repository = repository.Object;
-
             repository.Setup(x => x.GetContent(It.IsAny<string>()))
                 .Returns("Quijote");
 
