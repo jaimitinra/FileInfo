@@ -40,7 +40,7 @@ namespace FileInfoTests
             var result = service.Analize("pattern");
 
             result.Keys.Count.Should().Be(1);
-            result.Keys.First().Key.Should().Be("quijote");
+            result.Keys.First().Key.Should().Be("Quijote");
             result.Keys.First().Value.Should().Be(1);
         }
 
@@ -53,9 +53,9 @@ namespace FileInfoTests
             var result = service.Analize("pattern");
 
             result.Keys.Count.Should().Be(2);
-            result.Keys.First().Key.Should().Be("quijote");
+            result.Keys.First().Key.Should().Be("Quijote");
             result.Keys.First().Value.Should().Be(1);
-            result.Keys.Last().Key.Should().Be("sancho");
+            result.Keys.Last().Key.Should().Be("Sancho");
             result.Keys.Last().Value.Should().Be(1);
         }
 
@@ -67,7 +67,7 @@ namespace FileInfoTests
 
             var result = service.Analize("pattern");
 
-            result.Keys.Count.Should().Be(207);
+            result.Keys.Count.Should().Be(211);
         }
 
         [Test]
@@ -79,9 +79,9 @@ namespace FileInfoTests
             var result = service.Analize("pattern");
 
             result.Keys.Count.Should().Be(2);
-            result.Keys.First().Key.Should().Be("quijote");
+            result.Keys.First().Key.Should().Be("Quijote");
             result.Keys.First().Value.Should().Be(1);
-            result.Keys.Last().Key.Should().Be("sancho");
+            result.Keys.Last().Key.Should().Be("Sancho");
             result.Keys.Last().Value.Should().Be(1);
         }
 
