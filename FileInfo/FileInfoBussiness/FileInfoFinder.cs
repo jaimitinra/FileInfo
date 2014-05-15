@@ -8,7 +8,16 @@ namespace FileInfoBussiness
 
         public FileInfoResult Analize(string pattern)
         {
-            return new FileInfoResult();
+            var fileContentStringify = Repository.GetContent(pattern); 
+            if(string.IsNullOrWhiteSpace(fileContentStringify))
+                return new FileInfoResult();
+            return new FileInfoResult
+                {
+                    Keys = new List<KeyValuePair<string, int>>
+                        {
+                            new KeyValuePair<string, int>(fileContentStringify.ToLower(),1)
+                        }
+                };
         }
     }
 }

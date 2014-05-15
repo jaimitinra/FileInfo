@@ -17,7 +17,7 @@ namespace FileInfoTests
             service.Repository = repository.Object;
 
             repository.Setup(x => x.GetContent(It.IsAny<string>()))
-                .Returns(It.IsAny<string>());
+                .Returns(string.Empty);
 
             var result = service.Analize("pattern");
 
