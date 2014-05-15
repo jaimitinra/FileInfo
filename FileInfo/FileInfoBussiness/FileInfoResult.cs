@@ -4,11 +4,11 @@ namespace FileInfoBussiness
 {
     public class FileInfoResult
     {
-        public List<KeyValuePair<string, int>> Keys { get; set; }
+        public Dictionary<string, int> Keys { get; set; }
 
         public FileInfoResult()
         {
-            Keys = new List<KeyValuePair<string, int>>();
+            Keys = new Dictionary<string, int>();
         }
     }
 }
