@@ -67,7 +67,7 @@ namespace FileInfoTests
 
             var result = service.Analize("pattern");
 
-            result.Keys.Count.Should().Be(211);
+            result.Keys.Count.Should().Be(207);
         }
 
         [Test]

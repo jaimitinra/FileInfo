@@ -15,10 +15,13 @@ namespace FileInfoBussiness
             var dict = new Dictionary<string,int>();
             foreach (var piece in stringSplitted)
             {
-                if (!dict.ContainsKey(piece))
-                    dict.Add(piece, 1);
+                if (string.IsNullOrWhiteSpace(piece))
+                    continue;
+                var gaplessPiece = piece.Trim();
+                if (!dict.ContainsKey(gaplessPiece))
+                    dict.Add(gaplessPiece, 1);
                 else
-                    dict[piece]++;
+                    dict[gaplessPiece]++;
            }
             return new FileInfoResult
                 {
