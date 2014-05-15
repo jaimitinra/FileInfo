@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace FileInfoBussiness
 {
@@ -15,11 +16,31 @@ namespace FileInfoBussiness
             foreach (var piece in SplittedFileContent(fileContentStringify))
             {
                 var gaplessPiece = piece.Trim();
-                if (string.IsNullOrWhiteSpace(piece))
-                    continue;
+                if (string.IsNullOrWhiteSpace(gaplessPiece)) continue;
+                if (IsNotRelevantKey(gaplessPiece)) continue;
                 IncreaseOneKeyValuey(dict, gaplessPiece);
            }
             return new FileInfoResult { Keys = dict };
+        }
+
+        private bool IsNotRelevantKey(string gaplessPiece)
+        {
+            if (gaplessPiece.Length < 3 && FirstIsNotCapitalLetter(gaplessPiece[0]))
+                return true;
+            var notRelevantKeys = new List<string>
+                {
+                    "los","del"
+                };
+            return notRelevantKeys.Any(x => x == gaplessPiece);
+        }
+
+        private bool FirstIsNotCapitalLetter(char c)
+        {
+            var capitalLetters = new List<char>
+                {
+                    'A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'
+                };
+            return capitalLetters.All(x => x != c);
         }
 
         private void IncreaseOneKeyValuey(Dictionary<string, int> dict, string gaplessPiece)

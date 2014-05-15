@@ -67,7 +67,25 @@ namespace FileInfoTests
 
             var result = service.Analize("pattern");
 
-            result.Keys.Count.Should().Be(211);
+            result.Keys.Count.Should().Be(192);
+        }
+
+        [Test]
+        public void RetrieveRelevanceKeys()
+        {
+            repository.Setup(x => x.GetContent(It.IsAny<string>()))
+                .Returns(GetFlatText(1));
+
+            var result = service.Analize("pattern");
+
+            result.Keys.ContainsKey("y").Should().BeFalse();
+            result.Keys.ContainsKey("de").Should().BeFalse();
+            result.Keys.ContainsKey("el").Should().BeFalse();
+            result.Keys.ContainsKey("a").Should().BeFalse();
+            result.Keys.ContainsKey("los").Should().BeFalse();
+            result.Keys.ContainsKey("la").Should().BeFalse();
+            result.Keys.ContainsKey("un").Should().BeFalse();
+            result.Keys.ContainsKey("su").Should().BeFalse();
         }
 
         [Test]
