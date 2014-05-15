@@ -70,6 +70,21 @@ namespace FileInfoTests
             result.Keys.Count.Should().Be(211);
         }
 
+        [Test]
+        public void RetrieveGaplessKeys()
+        {
+            repository.Setup(x => x.GetContent(It.IsAny<string>()))
+                .Returns(" Quijote Sancho ");
+
+            var result = service.Analize("pattern");
+
+            result.Keys.Count.Should().Be(2);
+            result.Keys.First().Key.Should().Be("quijote");
+            result.Keys.First().Value.Should().Be(1);
+            result.Keys.Last().Key.Should().Be("sancho");
+            result.Keys.Last().Value.Should().Be(1);
+        }
+
         private string GetFlatText(int index)
         {
             if (index == 1)
