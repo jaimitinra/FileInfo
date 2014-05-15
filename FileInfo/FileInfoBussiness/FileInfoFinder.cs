@@ -11,12 +11,18 @@ namespace FileInfoBussiness
             var fileContentStringify = Repository.GetContent(pattern); 
             if(string.IsNullOrWhiteSpace(fileContentStringify))
                 return new FileInfoResult();
+            var stringSplitted = fileContentStringify.ToLower().Split(new[] {' '});
+            var dict = new Dictionary<string,int>();
+            foreach (var piece in stringSplitted)
+            {
+                if (!dict.ContainsKey(piece))
+                    dict.Add(piece, 1);
+                else
+                    dict[piece]++;
+           }
             return new FileInfoResult
                 {
-                    Keys = new List<KeyValuePair<string, int>>
-                        {
-                            new KeyValuePair<string, int>(fileContentStringify.ToLower(),1)
-                        }
+                    Keys = dict
                 };
         }
     }
