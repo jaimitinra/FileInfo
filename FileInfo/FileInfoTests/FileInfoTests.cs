@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Linq;
+using FileInfoBussiness;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -10,40 +10,18 @@ namespace FileInfoTests
     public class FileInfoTests
     {
         [Test]
-        public void RetrieveEmptyList()
+        public void RetrieveEmptyContent()
         {
             var service = new FileInfoFinder();
             var repository = new Mock<FileInfoRepository>();
             service.Repository = repository.Object;
 
-            repository.Setup(x => x.GetInfoByPattern(It.IsAny<string>()))
-                .Returns(new List<FileInfoResult>());
+            repository.Setup(x => x.GetContent(It.IsAny<string>()))
+                .Returns(It.IsAny<string>());
 
-            var result = service.Search("pattern");
+            var result = service.Analize("pattern");
 
-            result.Count.Should().Be(0);
-        }
-    }
-
-    public class FileInfoResult
-    {
-    }
-
-    public class FileInfoRepository
-    {
-        public virtual List<FileInfoResult> GetInfoByPattern(string pattern)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class FileInfoFinder
-    {
-        public FileInfoRepository Repository { get; set; }
-
-        public List<FileInfoResult> Search(string pattern)
-        {
-            return Repository.GetInfoByPattern(pattern);
+            result.Keys.Count.Should().Be(0);
         }
     }
 }
